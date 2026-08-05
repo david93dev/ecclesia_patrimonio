@@ -36,7 +36,7 @@ export const InputPasswordFiled = ({
       labelAction={forgotPasswordHref && (
         <a
           href={forgotPasswordHref}
-          className="mb-2.25 text-xs font-bold text-[#5b3fd1] hover:text-[#4931a8] hover:underline"
+          className="mb-2.25 text-[11px] font-bold text-[#5b3fd1] hover:text-[#4931a8] hover:underline"
         >
           {forgotPasswordLabel}
         </a>
