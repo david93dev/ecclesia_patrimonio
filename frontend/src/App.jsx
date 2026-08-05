@@ -1,10 +1,10 @@
 import "./index.css";
-import { AuthLogin } from "./pages/login/AuthLogin";
+import { SystemLayout } from "./layouts/system/SystemLayout";
 
 function App() {
   return (
     <>
-      <AuthLogin />
+      <SystemLayout />
     </>
   );
 }
