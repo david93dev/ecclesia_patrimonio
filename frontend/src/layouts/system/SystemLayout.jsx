@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SystemHeader } from "../../components/layout/SystemHeader";
 import { Sidebar } from "../../components/sidebar/Sidebar";
 
 const StatCard = ({ label, value, detail, tone, icon }) => (
@@ -27,16 +28,9 @@ export const SystemLayout = () => {
     <div className="flex h-dvh min-h-0 overflow-hidden bg-[#f7f7fa] text-[#19172c]">
       <Sidebar activeItem={activeItem} onSelect={setActiveItem} />
       <main className="min-w-0 flex-1 overflow-y-auto">
-        <header className="sticky top-0 z-20 flex h-18 items-center justify-between border-b border-[#e5e3eb]/90 bg-[#f7f7fa]/90 px-5 backdrop-blur-xl sm:px-8 lg:px-10">
-          <div className="ml-12 lg:ml-0"><p className="text-[10px] font-bold tracking-[.14em] text-[#8b8797] uppercase">Painel administrativo</p><h1 className="font-[Manrope] text-lg font-bold tracking-[-.4px]">Visão geral</h1></div>
-          <div className="flex items-center gap-2">
-            <button type="button" aria-label="Pesquisar" className="grid size-9 cursor-pointer place-items-center rounded-xl border border-[#e2e0e8] bg-white text-[#777486] hover:text-[#5b3fd1]"><svg viewBox="0 0 24 24" className="size-4.5 fill-none stroke-current stroke-[1.8]"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
-            <button type="button" aria-label="Notificações" className="relative grid size-9 cursor-pointer place-items-center rounded-xl border border-[#e2e0e8] bg-white text-[#777486] hover:text-[#5b3fd1]"><svg viewBox="0 0 24 24" className="size-4.5 fill-none stroke-current stroke-[1.8]"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><i className="absolute top-2 right-2 size-1.5 rounded-full bg-[#e7ad46] ring-2 ring-white" /></button>
-            <span className="ml-1 hidden text-right sm:block"><strong className="block text-[11px]">Paróquia São José</strong><small className="block text-[9px] text-[#8b8797]">Fortaleza, CE</small></span>
-          </div>
-        </header>
+        <SystemHeader />
 
-        <div className="mx-auto max-w-[1500px] p-5 sm:p-8 lg:p-10">
+        <div className="mx-auto max-w-375 p-5 sm:p-8 lg:p-10">
           <section className="mb-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div><span className="text-[11px] font-semibold text-[#5b3fd1]">QUARTA-FEIRA, 05 DE AGOSTO</span><h2 className="mt-1 font-[Manrope] text-2xl font-bold tracking-[-.8px] sm:text-[28px]">Olá, David. <span className="font-medium text-[#8b8797]">Tudo em ordem por aqui.</span></h2><p className="mt-2 text-xs text-[#777486]">Acompanhe o patrimônio e as atividades recentes da sua comunidade.</p></div>
             <button type="button" className="flex h-10 w-fit cursor-pointer items-center gap-2 rounded-xl bg-linear-to-r from-[#4931a8] to-[#6d50e8] px-4 text-xs font-bold text-white shadow-[0_9px_20px_rgba(73,49,168,.2)] hover:-translate-y-px"><span className="text-lg font-normal">+</span> Novo patrimônio</button>
