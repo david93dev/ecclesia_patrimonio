@@ -13,7 +13,7 @@ export const InputField = ({
       <div className="flex items-center justify-between">
         <label
           htmlFor={id}
-          className="mb-2.25 block text-xs font-bold text-[#292638]"
+          className="mb-2.25 block text-xs font-bold text-label"
         >
           {label}
         </label>
@@ -22,14 +22,14 @@ export const InputField = ({
 
       <div className="relative">
         {leadingIcon && (
-          <span className="pointer-events-none absolute top-1/2 left-4 size-[19px] -translate-y-1/2 text-[#8b8898] [&_svg]:size-full [&_svg]:fill-none [&_svg]:stroke-current [&_svg]:stroke-[1.7] [&_svg]:[stroke-linecap:round] [&_svg]:[stroke-linejoin:round]">
+          <span className="pointer-events-none absolute top-1/2 left-4 size-[19px] -translate-y-1/2 text-muted-soft [&_svg]:size-full [&_svg]:fill-none [&_svg]:stroke-current [&_svg]:stroke-[1.7] [&_svg]:[stroke-linecap:round] [&_svg]:[stroke-linejoin:round]">
             {leadingIcon}
           </span>
         )}
 
         <input
           id={id}
-          className={`h-[53px] w-full rounded-[11px] border border-[#dedde6] bg-white pr-12 ${leadingIcon ? "pl-[46px]" : "pl-4"} text-sm text-[#19172c] outline-none transition placeholder:text-[#aaa8b3] hover:border-[#cac8d5] focus:border-[#6d50e8] focus:shadow-[0_0_0_4px_rgba(91,63,209,.18)] ${className}`}
+          className={`h-[53px] w-full rounded-[11px] border border-border-input bg-surface pr-12 ${leadingIcon ? "pl-[46px]" : "pl-4"} text-sm text-foreground outline-none transition placeholder:text-placeholder hover:border-border-hover focus:border-brand-600 focus:shadow-focus ${className}`}
           {...inputProps}
         />
 

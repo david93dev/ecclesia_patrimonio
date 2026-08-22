@@ -1,0 +1,90 @@
+/*
+ * Tema visual Ecclesia Patrimônio
+ *
+ * Base e superfícies: estrutura de páginas, cards, tabelas, inputs e divisores.
+ * Marca: ações primárias, links, foco, ícones de destaque e gráficos.
+ * Feedback: badges, estados patrimoniais e indicadores operacionais.
+ * Sidebar/Auth: áreas de navegação e apresentação com fundo escuro.
+ * Sombras: elevação consistente por contexto de componente.
+ */
+@theme {
+  /* Base — body, layouts e superfícies elevadas */
+  --color-app-background: #f7f7fa;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #faf9fc;
+  --color-surface-tint: #eeecf8;
+  --color-foreground: #19172c;
+  --color-foreground-strong: #211e32;
+  --color-label: #292638;
+  --color-muted: #716f80;
+  --color-muted-soft: #8b8797;
+  --color-muted-faint: #9895a2;
+  --color-placeholder: #aaa8b3;
+  --color-icon-muted: #858291;
+
+  /* Bordas — inputs, cards, tabelas e controles */
+  --color-border: #e5e3eb;
+  --color-border-input: #dedde6;
+  --color-border-control: #e2e0e8;
+  --color-border-hover: #cac8d5;
+  --color-border-hover-soft: #cfc9e8;
+  --color-border-subtle: #eeecf1;
+  --color-border-row: #f0eef3;
+
+  /* Marca — botões, links, foco e destaques */
+  --color-brand-900: #4931a8;
+  --color-brand-700: #5b3fd1;
+  --color-brand-600: #6d50e8;
+  --color-brand-500: #8063e8;
+  --color-brand-400: #9b83fa;
+  --color-brand-300: #a38eff;
+  --color-brand-100: #eeeafd;
+  --color-accent: #e7ad46;
+  --color-accent-soft: #f0c36f;
+
+  /* Feedback — cards, badges e estados */
+  --color-success: #168765;
+  --color-success-chart: #20a981;
+  --color-success-soft: #e2f7f0;
+  --color-warning: #a36c13;
+  --color-warning-icon: #bd8120;
+  --color-warning-soft: #fff4d9;
+  --color-danger: #c64b5d;
+  --color-danger-soft: #fdebed;
+
+  /* Sidebar e painel escuro do login */
+  --color-sidebar-start: #1c1544;
+  --color-sidebar-end: #120e31;
+  --color-auth-background: #16103d;
+  --color-sidebar-foreground: #f1eff7;
+  --color-sidebar-muted: #aaa3c3;
+  --color-sidebar-profile: #b5aec9;
+  --color-auth-heading-muted: #c8c2df;
+  --color-auth-copy: #c5c0d5;
+  --color-auth-footer: #827b9b;
+  --color-mask: #000000;
+
+  /* Gráfico de distribuição */
+  --color-chart-1: #5b3fd1;
+  --color-chart-2: #9b83fa;
+  --color-chart-3: #e7ad46;
+  --color-chart-4: #20a981;
+
+  /* Elevação — cards, ações, sidebar e elementos decorativos */
+  --shadow-card: 0 7px 25px rgb(31 24 61 / 4.5%);
+  --shadow-panel: 0 16px 45px rgb(31 24 61 / 6%);
+  --shadow-primary: 0 13px 26px rgb(73 49 168 / 25%);
+  --shadow-primary-hover: 0 16px 30px rgb(73 49 168 / 32%);
+  --shadow-sidebar: 14px 0 45px rgb(22 16 61 / 22%);
+  --shadow-avatar: 0 7px 18px rgb(91 63 209 / 30%);
+  --shadow-focus: 0 0 0 4px rgb(91 63 209 / 18%);
+  --shadow-accent-glow: 0 0 22px rgb(231 173 70 / 70%);
+  --shadow-logo: 0 8px 24px rgb(22 16 61 / 15%);
+  --drop-shadow-hero: 0 32px 35px rgb(0 0 0 / 38%);
+
+  /* Fundos decorativos — somente login e sidebar */
+  --background-image-sidebar-glow: radial-gradient(circle at top left, rgb(128 99 232 / 23%), transparent 68%);
+  --background-image-auth-pattern: radial-gradient(rgb(255 255 255 / 28%) 0.7px, transparent 0.7px);
+  --background-image-auth-grid: linear-gradient(rgb(128 97 238 / 22%) 1px, transparent 1px), linear-gradient(90deg, rgb(128 97 238 / 22%) 1px, transparent 1px);
+  --background-image-auth-surface-glow: radial-gradient(circle at 100% 0, var(--color-surface-tint) 0, transparent 35%);
+}

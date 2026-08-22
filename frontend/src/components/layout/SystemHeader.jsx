@@ -7,9 +7,9 @@ export const SystemHeader = ({
   onNotifications,
 }) => {
   return (
-    <header className="sticky top-0 z-20 flex h-18 items-center justify-between border-b border-[#e5e3eb]/90 bg-[#f7f7fa]/90 px-5 backdrop-blur-xl sm:px-8 lg:px-10">
+    <header className="sticky top-0 z-20 flex h-18 items-center justify-between border-b border-border/90 bg-app-background/90 px-5 backdrop-blur-xl sm:px-8 lg:px-10">
       <div className="ml-12 lg:ml-0">
-        <p className="text-[10px] font-bold tracking-[.14em] text-[#8b8797] uppercase">
+        <p className="text-[10px] font-bold tracking-[.14em] text-muted-soft uppercase">
           {eyebrow}
         </p>
         <h1 className="font-[Manrope] text-lg font-bold tracking-[-.4px]">
@@ -22,7 +22,7 @@ export const SystemHeader = ({
           type="button"
           onClick={onSearch}
           aria-label="Pesquisar"
-          className="grid size-9 cursor-pointer place-items-center rounded-xl border border-[#e2e0e8] bg-white text-[#777486] transition hover:border-[#cfc9e8] hover:text-[#5b3fd1]"
+          className="grid size-9 cursor-pointer place-items-center rounded-xl border border-border-control bg-surface text-muted transition hover:border-border-hover-soft hover:text-brand-700"
         >
           <FiSearch size={18} aria-hidden="true" />
         </button>
@@ -31,15 +31,15 @@ export const SystemHeader = ({
           type="button"
           onClick={onNotifications}
           aria-label="Notificações"
-          className="relative grid size-9 cursor-pointer place-items-center rounded-xl border border-[#e2e0e8] bg-white text-[#777486] transition hover:border-[#cfc9e8] hover:text-[#5b3fd1]"
+          className="relative grid size-9 cursor-pointer place-items-center rounded-xl border border-border-control bg-surface text-muted transition hover:border-border-hover-soft hover:text-brand-700"
         >
           <FiBell size={18} aria-hidden="true" />
-          <i className="absolute top-2 right-2 size-1.5 rounded-full bg-[#e7ad46] ring-2 ring-white" />
+          <i className="absolute top-2 right-2 size-1.5 rounded-full bg-accent ring-2 ring-surface" />
         </button>
 
         <span className="ml-1 hidden text-right sm:block">
           <strong className="block text-[11px]">{organization}</strong>
-          <small className="block text-[9px] text-[#8b8797]">{location}</small>
+          <small className="block text-[9px] text-muted-soft">{location}</small>
         </span>
       </div>
     </header>

@@ -36,7 +36,7 @@ export const InputPasswordFiled = ({
       labelAction={forgotPasswordHref && (
         <a
           href={forgotPasswordHref}
-          className="mb-2.25 text-[11px] font-bold text-[#5b3fd1] hover:text-[#4931a8] hover:underline"
+          className="mb-2.25 text-[11px] font-bold text-brand-700 hover:text-brand-900 hover:underline"
         >
           {forgotPasswordLabel}
         </a>
@@ -48,7 +48,7 @@ export const InputPasswordFiled = ({
           onClick={() => setShowPassword((value) => !value)}
           aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
           aria-pressed={showPassword}
-          className="absolute top-1/2 right-2.5 grid size-8.5 -translate-y-1/2 cursor-pointer place-items-center rounded-lg border-0 bg-transparent text-[#858291] hover:bg-[#eeeafd] hover:text-[#5b3fd1] focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[#5b3fd1]"
+          className="absolute top-1/2 right-2.5 grid size-8.5 -translate-y-1/2 cursor-pointer place-items-center rounded-lg border-0 bg-transparent text-icon-muted hover:bg-brand-100 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-700"
         >
           <span className="block size-4.75 [&_svg]:size-full [&_svg]:fill-none [&_svg]:stroke-current [&_svg]:stroke-[1.7] [&_svg]:[stroke-linecap:round] [&_svg]:[stroke-linejoin:round]">
             <EyeIcon hidden={showPassword} />
