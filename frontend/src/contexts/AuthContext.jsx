@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     user,
     isAuthenticated: Boolean(user),
     login: ({ email }) => {
-      const session = { name: "David Silva", email, role: "Administrador" };
+      const session = { name: "David Silva", email, role: "Administrador", permissions: ["dashboard.view"] };
       localStorage.setItem(SESSION_KEY, JSON.stringify(session));
       setUser(session);
     },
@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem(SESSION_KEY);
       setUser(null);
     },
+    hasPermission: (permission) => user?.role === "Administrador" || user?.permissions?.includes(permission) === true,
   }), [user]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

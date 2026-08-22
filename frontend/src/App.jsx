@@ -6,6 +6,7 @@ import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { PublicRoute } from "./routes/PublicRoute";
 import { SystemLayout } from "./layouts/system/SystemLayout";
 import { PlaceholderPage } from "./pages/system/PlaceholderPage";
+import { DashboardPage } from "./pages/dashboard/DashboardPage";
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
     <BrowserRouter><AuthProvider><Routes>
       <Route element={<PublicRoute />}><Route path="/login" element={<AuthLogin />} /></Route>
       <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<SystemLayout />} />
+        <Route path="/dashboard" element={<SystemLayout><DashboardPage /></SystemLayout>} />
         <Route path="/patrimonios" element={<SystemLayout><PlaceholderPage title="Patrimônios" /></SystemLayout>} />
         <Route path="/inventario" element={<SystemLayout><PlaceholderPage title="Inventário" /></SystemLayout>} />
         <Route path="/manutencoes" element={<SystemLayout><PlaceholderPage title="Manutenções" /></SystemLayout>} />
