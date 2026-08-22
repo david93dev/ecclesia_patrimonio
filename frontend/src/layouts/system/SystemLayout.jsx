@@ -21,16 +21,16 @@ const assets = [
   ["Arquivo paroquial — Livro 04", "Documento", "Arquivo", "Regular"],
 ];
 
-export const SystemLayout = () => {
+export const SystemLayout = ({ children }) => {
   const [activeItem, setActiveItem] = useState("inicio");
 
   return (
     <div className="flex h-dvh min-h-0 overflow-hidden bg-[#f7f7fa] text-[#19172c]">
       <Sidebar activeItem={activeItem} onSelect={setActiveItem} />
       <main className="min-w-0 flex-1 overflow-y-auto">
-        <SystemHeader />
+        <SystemHeader title={children ? "Área administrativa" : "Visão geral"} />
 
-        <div className="mx-auto max-w-375 p-5 sm:p-8 lg:p-10">
+        {children || <div className="mx-auto max-w-375 p-5 sm:p-8 lg:p-10">
           <section className="mb-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div><span className="text-[11px] font-semibold text-[#5b3fd1]">QUARTA-FEIRA, 05 DE AGOSTO</span><h2 className="mt-1 font-[Manrope] text-2xl font-bold tracking-[-.8px] sm:text-[28px]">Olá, David. <span className="font-medium text-[#8b8797]">Tudo em ordem por aqui.</span></h2><p className="mt-2 text-xs text-[#777486]">Acompanhe o patrimônio e as atividades recentes da sua comunidade.</p></div>
             <button type="button" className="flex h-10 w-fit cursor-pointer items-center gap-2 rounded-xl bg-linear-to-r from-[#4931a8] to-[#6d50e8] px-4 text-xs font-bold text-white shadow-[0_9px_20px_rgba(73,49,168,.2)] hover:-translate-y-px"><span className="text-lg font-normal">+</span> Novo patrimônio</button>
@@ -55,7 +55,7 @@ export const SystemLayout = () => {
               <div className="grid grid-cols-2 gap-3 text-[10px]">{[["#5b3fd1","Imóveis","42%"],["#9b83fa","Arte sacra","25%"],["#e7ad46","Documentos","17%"],["#20a981","Outros","16%"]].map(([color,label,value])=><div key={label} className="flex items-center gap-2"><i className="size-2 rounded-full" style={{background:color}}/><span className="text-[#777486]">{label}</span><strong className="ml-auto">{value}</strong></div>)}</div>
             </article>
           </section>
-        </div>
+        </div>}
       </main>
     </div>
   );

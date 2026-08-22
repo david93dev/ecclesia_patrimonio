@@ -2,6 +2,8 @@ import heroImage from "../../assets/hero.png";
 import ecclesiaLogo from "../../assets/ecclesia-logo-v3.png";
 import { InputField } from "../../components/ui/inputfield";
 import { InputPasswordFiled } from "../../components/ui/inputPasswordFiled";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Brand = ({ mobile = false }) => (
   <a
@@ -18,6 +20,17 @@ const Brand = ({ mobile = false }) => (
 );
 
 export const AuthLogin = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    login({ email: data.get("email") });
+    navigate(location.state?.from?.pathname || "/dashboard", { replace: true });
+  };
+
   return (
     <main className="grid h-dvh max-h-dvh min-h-0 grid-cols-1 overflow-hidden lg:grid-cols-[minmax(430px,.94fr)_minmax(520px,1.06fr)]">
       <section aria-label="Apresentação do sistema" className="relative hidden h-dvh min-h-0 flex-col overflow-hidden bg-[#16103d] px-[clamp(42px,5vw,76px)] pt-10.5 pb-8.5 text-white lg:flex [@media(max-height:760px)]:pt-7 [@media(max-height:760px)]:pb-6">
@@ -51,7 +64,7 @@ export const AuthLogin = () => {
             <p className="m-0 text-sm text-[#716f80]">Entre com seus dados para acessar sua conta.</p>
           </div>
 
-          <form onSubmit={(event) => event.preventDefault()}>
+          <form onSubmit={handleSubmit}>
             <InputField
               id="email"
               label="E-mail"

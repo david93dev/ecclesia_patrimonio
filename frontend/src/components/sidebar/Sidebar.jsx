@@ -6,13 +6,13 @@ import { SidebarMenu } from "./SidebarMenu";
 import { SidebarUser } from "./SidebarUser";
 
 const menuItems = [
-  { id: "inicio", label: "Visão geral", icon: "inicio" },
-  { id: "patrimonio", label: "Patrimônios", icon: "patrimonio", badge: "248" },
-  { id: "inventario", label: "Inventário", icon: "inventario" },
-  { id: "manutencao", label: "Manutenções", icon: "manutencao", badge: "6" },
-  { id: "relatorios", label: "Relatórios", icon: "relatorios" },
-  { id: "usuarios", label: "Usuários", icon: "usuarios" },
-  { id: "configuracoes", label: "Configurações", icon: "configuracoes" },
+  { id: "inicio", label: "Visão geral", icon: "inicio", to: "/dashboard" },
+  { id: "patrimonio", label: "Patrimônios", icon: "patrimonio", badge: "248", to: "/patrimonios" },
+  { id: "inventario", label: "Inventário", icon: "inventario", to: "/inventario" },
+  { id: "manutencao", label: "Manutenções", icon: "manutencao", badge: "6", to: "/manutencoes" },
+  { id: "relatorios", label: "Relatórios", icon: "relatorios", to: "/relatorios" },
+  { id: "usuarios", label: "Usuários", icon: "usuarios", to: "/usuarios" },
+  { id: "configuracoes", label: "Configurações", icon: "configuracoes", to: "/configuracoes" },
 ];
 
 export const Sidebar = ({ activeItem, onSelect }) => {
