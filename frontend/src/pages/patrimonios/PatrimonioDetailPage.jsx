@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { FiEdit2, FiImage } from "react-icons/fi";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { PageHeader } from "../../components/layout/PageHeader";
 import { PatrimonioHistory } from "../../components/patrimonios/PatrimonioHistory";
 import { BackLink } from "../../components/ui/BackLink";
 import { PageFeedback } from "../../components/ui/PageFeedback";
 import { StatusBadge } from "../../components/ui/Badge";
-import { getPatrimonio } from "../../services/patrimonioService";
+import { Button } from "../../components/ui/Button";
+import { ConfirmDialog } from "../../components/ui/ConfirmDialog";
+import { useAuth } from "../../contexts/AuthContext";
+import { getPatrimonio, inactivatePatrimonio } from "../../services/patrimonioService";
 
 const date = (value) =>
   value
@@ -25,7 +28,10 @@ const money = (value) =>
 export const PatrimonioDetailPage = () => {
   const { id } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const [state, setState] = useState({ loading: true, item: null, error: "" });
+  const [confirmation, setConfirmation] = useState({ open: false, loading: false, error: "" });
   useEffect(() => {
     getPatrimonio(id)
       .then((item) => setState({ loading: false, item, error: "" }))
@@ -54,6 +60,18 @@ export const PatrimonioDetailPage = () => {
     );
 
   const item = state.item;
+  const isAdministrator = user?.role === "Administrador";
+  const hasActiveLoan = item.emprestimoAtivo || String(item.status).toLowerCase() === "emprestado";
+  const isInactive = String(item.status).toLowerCase() === "inativo";
+  const confirmInactivation = async () => {
+    setConfirmation({ open: true, loading: true, error: "" });
+    try {
+      await inactivatePatrimonio(id);
+      navigate("/patrimonios", { replace: true, state: { success: "Patrimônio inativado com sucesso." } });
+    } catch (error) {
+      setConfirmation({ open: true, loading: false, error: error.message });
+    }
+  };
   const details = [
     ["Código patrimonial", item.codigoPatrimonial],
     ["Departamento", item.departamento],
@@ -71,9 +89,10 @@ export const PatrimonioDetailPage = () => {
         eyebrow="DETALHES DO PATRIMÔNIO"
         title={item.nome}
         description={`Código patrimonial: ${item.codigoPatrimonial}`}
-        actionLabel="Editar patrimônio"
-        actionTo={`/patrimonios/${id}/editar`}
-        ActionIcon={FiEdit2}
+        actions={<>
+          <Button variant="primary" Icon={FiEdit2} onClick={() => navigate(`/patrimonios/${id}/editar`)}>Editar patrimônio</Button>
+          {isAdministrator && !isInactive && <Button variant="cancel" onClick={() => setConfirmation({ open: true, loading: false, error: "" })} disabled={hasActiveLoan} title={hasActiveLoan ? "Não é possível inativar um patrimônio com empréstimo ativo" : "Inativar patrimônio"}>Inativar patrimônio</Button>}
+        </>}
       />
       <PageFeedback success={location.state?.success} />
       <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
@@ -118,6 +137,16 @@ export const PatrimonioDetailPage = () => {
         </div>
       </div>
       <PatrimonioHistory entries={item.historico} />
+      <ConfirmDialog
+        open={confirmation.open}
+        title="Inativar patrimônio?"
+        description={`O patrimônio “${item.nome}” deixará de aparecer nas listagens padrão. Esta ação não excluirá permanentemente seus dados.`}
+        confirmLabel="Inativar patrimônio"
+        loading={confirmation.loading}
+        error={confirmation.error}
+        onConfirm={confirmInactivation}
+        onCancel={() => setConfirmation({ open: false, loading: false, error: "" })}
+      />
     </div>
   );
 };

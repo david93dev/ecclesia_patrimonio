@@ -11,6 +11,7 @@ export const PageHeader = ({
   actionTo,
   ActionIcon,
   onAction,
+  actions,
 }) => {
   const actionContent = (
     <>
@@ -33,13 +34,15 @@ export const PageHeader = ({
         {description && <p className="mt-1 text-sm text-muted">{description}</p>}
       </div>
 
-      {actionLabel && actionTo && (
+      {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
+
+      {!actions && actionLabel && actionTo && (
         <Link to={actionTo} className={actionClassName}>
           {actionContent}
         </Link>
       )}
 
-      {actionLabel && !actionTo && (
+      {!actions && actionLabel && !actionTo && (
         <button type="button" onClick={onAction} className={actionClassName}>
           {actionContent}
         </button>

@@ -192,3 +192,26 @@ export const updatePatrimonio = async (id, data) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   return updated;
 };
+
+export const inactivatePatrimonio = async (id) => {
+  if (API_URL) return request(`/patrimonios/${id}/inativar`, { method: "PATCH" });
+  await wait(500);
+  const items = readLocal();
+  const index = items.findIndex((item) => String(item.id) === String(id));
+  if (index < 0) throw new Error("Patrimônio não encontrado.");
+  const current = items[index];
+  if (current.emprestimoAtivo || String(current.status).toLowerCase() === "emprestado") {
+    throw new Error("Este patrimônio possui um empréstimo ativo e não pode ser inativado.");
+  }
+  if (String(current.status).toLowerCase() === "inativo") throw new Error("Este patrimônio já está inativo.");
+  const now = new Date().toISOString();
+  const updated = {
+    ...current,
+    status: "Inativo",
+    atualizadoEm: now,
+    historico: [...(current.historico ?? []), { data: now, acao: "Patrimônio inativado", alteracoes: [{ campo: "status", anterior: current.status, atual: "Inativo" }] }],
+  };
+  items[index] = updated;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+  return updated;
+};
