@@ -83,7 +83,7 @@ export const AuthLogin = () => {
               required
             />
 
-            <button type="submit" className="group mt-2 flex h-13.75 w-full cursor-pointer items-center justify-center gap-2.75 rounded-[11px] border-0 bg-linear-[105deg,var(--color-brand-900),var(--color-brand-600)] text-sm font-bold text-white shadow-primary transition hover:-translate-y-0.5 hover:shadow-primary-hover active:translate-y-0">
+            <button type="submit" className="group mt-2 flex h-13.75 w-full cursor-pointer items-center justify-center gap-2.75 rounded-[11px] border-0 bg-linear-[105deg,var(--color-brand-900),var(--color-brand-600)] text-sm font-bold text-white transition hover:-translate-y-0.5 active:translate-y-0">
               Entrar na plataforma
               <svg className="w-4.5 fill-none stroke-current stroke-2 transition [stroke-linecap:round] [stroke-linejoin:round] group-hover:translate-x-0.75" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5" /></svg>
             </button>

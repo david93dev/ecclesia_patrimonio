@@ -1,11 +1,17 @@
 const variants = {
   subtle: "border-border-control bg-surface text-brand-700 shadow-card hover:border-brand-400/50 hover:bg-brand-100/35 hover:text-brand-900 disabled:hover:border-border-control disabled:hover:bg-surface",
-  primary: "border-brand-600 bg-brand-700 text-white shadow-primary hover:bg-brand-900 hover:shadow-primary-hover",
+  primary: "border-brand-600 bg-brand-700 text-white hover:bg-brand-900",
 };
 
 const iconVariants = {
   subtle: "bg-brand-100/70 text-brand-700 group-hover:bg-brand-100",
   primary: "bg-white/12 text-white group-hover:bg-white/18",
+};
+
+const iconAnimations = {
+  none: "",
+  rotate: "transition-transform duration-500 group-hover:rotate-180",
+  lift: "transition-transform duration-200 group-hover:-translate-y-0.5",
 };
 
 export const Button = ({
@@ -18,6 +24,7 @@ export const Button = ({
   disabled = false,
   className = "",
   iconClassName = "",
+  iconAnimation = "none",
   ...buttonProps
 }) => {
   const isDisabled = disabled || loading;
@@ -34,7 +41,7 @@ export const Button = ({
           <Icon
             size={15}
             strokeWidth={2.2}
-            className={`${loading ? "animate-spin" : "transition-transform duration-500 group-hover:rotate-180"} ${iconClassName}`}
+            className={`${loading ? "animate-spin" : iconAnimations[iconAnimation] ?? iconAnimations.none} ${iconClassName}`}
             aria-hidden="true"
           />
         </span>

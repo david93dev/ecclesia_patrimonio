@@ -157,3 +157,38 @@ export const createPatrimonio = async (data) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify([item, ...items]));
   return item;
 };
+
+export const updatePatrimonio = async (id, data) => {
+  const formData = new FormData();
+  Object.entries(data).forEach(([key, value]) => {
+    if (key === "imagem" && !(value instanceof File)) return;
+    if (value !== "" && value != null) formData.append(key, value);
+  });
+
+  if (API_URL) {
+    return request(`/patrimonios/${id}`, { method: "PUT", body: formData });
+  }
+
+  await wait(600);
+  const items = readLocal();
+  const index = items.findIndex((item) => String(item.id) === String(id));
+  if (index < 0) throw new Error("Patrimônio não encontrado.");
+
+  const current = items[index];
+  const editableFields = ["nome", "descricao", "categoria", "departamento", "tipo", "responsavel", "valor", "dataAquisicao"];
+  const alteracoes = editableFields
+    .filter((field) => String(current[field] ?? "") !== String(data[field] ?? ""))
+    .map((field) => ({ campo: field, anterior: current[field] ?? "", atual: data[field] ?? "" }));
+  if (data.imagem instanceof File) alteracoes.push({ campo: "imagem", anterior: current.imagem ? "Imagem anterior" : "Sem imagem", atual: data.imagem.name });
+
+  const updated = {
+    ...current,
+    ...data,
+    imagem: data.imagem instanceof File ? await fileToDataUrl(data.imagem) : current.imagem,
+    atualizadoEm: new Date().toISOString(),
+    historico: [...(current.historico ?? []), { data: new Date().toISOString(), acao: "Patrimônio atualizado", alteracoes }],
+  };
+  items[index] = updated;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+  return updated;
+};

@@ -143,6 +143,7 @@ export const DashboardPage = () => {
         <Button
           onClick={() => load()}
           Icon={FiRefreshCw}
+          iconAnimation="rotate"
           loading={state.status === "loading"}
           loadingLabel="Atualizando..."
         >
