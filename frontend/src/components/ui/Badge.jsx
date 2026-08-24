@@ -9,6 +9,7 @@ const variants = {
 };
 
 const statusVariants = {
+  ativo: "success",
   disponivel: "success",
   "em uso": "brand",
   "em manutencao": "warning",

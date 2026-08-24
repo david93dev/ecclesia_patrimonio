@@ -6,6 +6,7 @@ import { Sidebar } from "../../components/sidebar/Sidebar";
 const routeTitles = {
   "/dashboard": "Visão geral",
   "/patrimonios": "Patrimônios",
+  "/departamentos": "Departamentos",
   "/inventario": "Inventário",
   "/manutencoes": "Manutenções",
   "/relatorios": "Relatórios",
@@ -18,6 +19,8 @@ export const SystemLayout = () => {
   const { pathname } = useLocation();
   const title = pathname.startsWith("/patrimonios")
     ? "Gestão de Patrimônios"
+    : pathname.startsWith("/departamentos")
+      ? "Gestão de Departamentos"
     : routeTitles[pathname] ?? "Área administrativa";
   return (
     <div className="flex h-dvh min-h-0 overflow-hidden bg-app-background text-foreground">

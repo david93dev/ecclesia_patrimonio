@@ -13,6 +13,12 @@ const menuItems = [
     icon: "patrimonio",
     to: "/patrimonios",
   },
+  {
+    id: "departamentos",
+    label: "Departamentos",
+    icon: "departamentos",
+    to: "/departamentos",
+  },
   // {
   //   id: "inventario",
   //   label: "Inventário",

@@ -4,6 +4,7 @@ import {
   FiBox,
   FiClipboard,
   FiHome,
+  FiLayers,
   FiSettings,
   FiTool,
   FiUsers,
@@ -13,6 +14,7 @@ import { NavLink } from "react-router-dom";
 const icons = {
   inicio: FiHome,
   patrimonio: FiArchive,
+  departamentos: FiLayers,
   inventario: FiClipboard,
   manutencao: FiTool,
   relatorios: FiBarChart2,

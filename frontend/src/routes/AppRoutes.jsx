@@ -7,6 +7,9 @@ import { PatrimonioCreatePage } from "../pages/patrimonios/PatrimonioCreatePage"
 import { PatrimonioDetailPage } from "../pages/patrimonios/PatrimonioDetailPage";
 import { PatrimonioEditPage } from "../pages/patrimonios/PatrimonioEditPage";
 import { PatrimonioListPage } from "../pages/patrimonios/PatrimonioListPage";
+import { DepartamentoCreatePage } from "../pages/departamentos/DepartamentoCreatePage";
+import { DepartamentoEditPage } from "../pages/departamentos/DepartamentoEditPage";
+import { DepartamentoListPage } from "../pages/departamentos/DepartamentoListPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
 
@@ -25,6 +28,9 @@ export const AppRoutes = () => (
             <Route path="/patrimonios/novo" element={<PatrimonioCreatePage />} />
             <Route path="/patrimonios/:id/editar" element={<PatrimonioEditPage />} />
             <Route path="/patrimonios/:id" element={<PatrimonioDetailPage />} />
+            <Route path="/departamentos" element={<DepartamentoListPage />} />
+            <Route path="/departamentos/novo" element={<DepartamentoCreatePage />} />
+            <Route path="/departamentos/:id/editar" element={<DepartamentoEditPage />} />
             {/* <Route path="/inventario" element={<PlaceholderPage title="Inventário" />} />
             <Route path="/manutencoes" element={<PlaceholderPage title="Manutenções" />} />
             <Route path="/relatorios" element={<PlaceholderPage title="Relatórios" />} />
