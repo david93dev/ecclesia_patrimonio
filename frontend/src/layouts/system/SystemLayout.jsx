@@ -16,11 +16,14 @@ const routeTitles = {
 export const SystemLayout = () => {
   const [activeItem, setActiveItem] = useState("inicio");
   const { pathname } = useLocation();
+  const title = pathname.startsWith("/patrimonios")
+    ? "Gestão de Patrimônios"
+    : routeTitles[pathname] ?? "Área administrativa";
   return (
     <div className="flex h-dvh min-h-0 overflow-hidden bg-app-background text-foreground">
       <Sidebar activeItem={activeItem} onSelect={setActiveItem} />
       <main className="min-w-0 flex-1 overflow-y-auto">
-        <SystemHeader title={routeTitles[pathname] ?? "Área administrativa"} />
+        <SystemHeader title={title} />
         <Outlet />
       </main>
     </div>

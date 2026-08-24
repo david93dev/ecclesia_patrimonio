@@ -13,31 +13,31 @@ const menuItems = [
     icon: "patrimonio",
     to: "/patrimonios",
   },
-  {
-    id: "inventario",
-    label: "Inventário",
-    icon: "inventario",
-    to: "/inventario",
-  },
-  {
-    id: "manutencao",
-    label: "Manutenções",
-    icon: "manutencao",
-    to: "/manutencoes",
-  },
-  {
-    id: "relatorios",
-    label: "Relatórios",
-    icon: "relatorios",
-    to: "/relatorios",
-  },
-  { id: "usuarios", label: "Usuários", icon: "usuarios", to: "/usuarios" },
-  {
-    id: "configuracoes",
-    label: "Configurações",
-    icon: "configuracoes",
-    to: "/configuracoes",
-  },
+  // {
+  //   id: "inventario",
+  //   label: "Inventário",
+  //   icon: "inventario",
+  //   to: "/inventario",
+  // },
+  // {
+  //   id: "manutencao",
+  //   label: "Manutenções",
+  //   icon: "manutencao",
+  //   to: "/manutencoes",
+  // },
+  // {
+  //   id: "relatorios",
+  //   label: "Relatórios",
+  //   icon: "relatorios",
+  //   to: "/relatorios",
+  // },
+  // { id: "usuarios", label: "Usuários", icon: "usuarios", to: "/usuarios" },
+  // {
+  //   id: "configuracoes",
+  //   label: "Configurações",
+  //   icon: "configuracoes",
+  //   to: "/configuracoes",
+  // },
 ];
 
 export const Sidebar = ({ activeItem, onSelect }) => {
