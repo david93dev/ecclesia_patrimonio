@@ -5,6 +5,12 @@ const LOAN_KEY = "ecclesia:emprestimos";
 const ASSET_KEY = "ecclesia:patrimonios";
 const wait = (ms = 350) => new Promise((resolve) => setTimeout(resolve, ms));
 
+export const getEmprestimoStatus = (loan) => {
+  if (loan.status === "Devolvido") return "Devolvido";
+  const today = new Date().toLocaleDateString("en-CA");
+  return loan.dataPrevistaDevolucao < today ? "Atrasado" : "Emprestado";
+};
+
 const MOCK_EMPRESTIMOS = [
   {
     id: "emp-001",
@@ -128,4 +134,16 @@ export const devolverEmprestimo = async (id, data, user) => {
   localStorage.setItem(LOAN_KEY, JSON.stringify(loans));
   await changeAssetStatus(loans[index].patrimonioId, "Disponível", "Devolução de empréstimo registrada", { emprestimoAtivo: null, ...(occurrence && { ultimaOcorrencia: occurrence }) });
   return loans[index];
+};
+
+const fileToDataUrl = (file) => new Promise((resolve, reject) => {
+  const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error("Não foi possível processar o documento.")); reader.readAsDataURL(file);
+});
+
+export const anexarTermoAssinado = async (id, file, user) => {
+  if (API_URL) { const body = new FormData(); body.append("termo", file); return request(`/emprestimos/${id}/termo-assinado`, { method: "POST", body, headers: {} }); }
+  await wait(500); const loans = readLoans(); const index = loans.findIndex((item) => String(item.id) === String(id));
+  if (index < 0) throw new Error("Empréstimo não encontrado.");
+  loans[index] = { ...loans[index], termoAssinado: { nome: file.name, tipo: file.type, tamanho: file.size, dados: await fileToDataUrl(file), anexadoEm: new Date().toISOString(), anexadoPor: user?.name ?? user?.email ?? "Usuário do sistema" } };
+  localStorage.setItem(LOAN_KEY, JSON.stringify(loans)); return loans[index];
 };

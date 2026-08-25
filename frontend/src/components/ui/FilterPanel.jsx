@@ -16,7 +16,12 @@ export const FilterPanel = ({ fields, values, onChange, onClear, resultCount, re
       </div>
     </div>
     {expanded && <div className="mt-4 grid gap-4 border-t border-border pt-4 sm:grid-cols-2 xl:grid-cols-4">
-      {fields.map((field) => <label key={field.key} className="text-xs font-bold text-label">{field.label}<select value={values[field.key] ?? ""} onChange={(event) => onChange(field.key, event.target.value)} className="mt-2 h-11 w-full rounded-xl border border-border-input bg-surface px-3 text-sm font-normal text-foreground outline-none transition focus:border-brand-600 focus:shadow-focus"><option value="">{field.placeholder ?? "Todos"}</option>{field.options.map((option) => { const value = typeof option === "string" ? option : option.value; const label = typeof option === "string" ? option : option.label; return <option key={value} value={value}>{label}</option>; })}</select></label>)}
+      {fields.map((field) => {
+        const controlClass = "mt-2 h-11 w-full rounded-xl border border-border-input bg-surface px-3 text-sm font-normal text-foreground outline-none transition focus:border-brand-600 focus:shadow-focus";
+        if (field.render) return <div key={field.key}>{field.render({ value: values[field.key] ?? "", onChange: (value) => onChange(field.key, value), className: controlClass })}</div>;
+        if (field.type && field.type !== "select") return <label key={field.key} className="text-xs font-bold text-label">{field.label}<input type={field.type} value={values[field.key] ?? ""} min={field.min?.(values) ?? field.min} max={field.max?.(values) ?? field.max} placeholder={field.placeholder} onChange={(event) => onChange(field.key, event.target.value)} className={controlClass} /></label>;
+        return <label key={field.key} className="text-xs font-bold text-label">{field.label}<select value={values[field.key] ?? ""} onChange={(event) => onChange(field.key, event.target.value)} className={controlClass}><option value="">{field.placeholder ?? "Todos"}</option>{(field.options ?? []).map((option) => { const value = typeof option === "string" ? option : option.value; const label = typeof option === "string" ? option : option.label; return <option key={value} value={value}>{label}</option>; })}</select></label>;
+      })}
     </div>}
   </section>
 };

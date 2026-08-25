@@ -11,8 +11,10 @@ import { DepartamentoCreatePage } from "../pages/departamentos/DepartamentoCreat
 import { DepartamentoEditPage } from "../pages/departamentos/DepartamentoEditPage";
 import { DepartamentoListPage } from "../pages/departamentos/DepartamentoListPage";
 import { EmprestimoCreatePage } from "../pages/emprestimos/EmprestimoCreatePage";
+import { EmprestimoDetailPage } from "../pages/emprestimos/EmprestimoDetailPage";
 import { EmprestimoListPage } from "../pages/emprestimos/EmprestimoListPage";
 import { EmprestimoReturnPage } from "../pages/emprestimos/EmprestimoReturnPage";
+import { EmprestimoTermPage } from "../pages/emprestimos/EmprestimoTermPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
 
@@ -37,6 +39,8 @@ export const AppRoutes = () => (
             <Route path="/emprestimos" element={<EmprestimoListPage />} />
             <Route path="/emprestimos/novo" element={<EmprestimoCreatePage />} />
             <Route path="/emprestimos/:id/devolver" element={<EmprestimoReturnPage />} />
+            <Route path="/emprestimos/:id/termo" element={<EmprestimoTermPage />} />
+            <Route path="/emprestimos/:id" element={<EmprestimoDetailPage />} />
             {/* <Route path="/inventario" element={<PlaceholderPage title="Inventário" />} />
             <Route path="/manutencoes" element={<PlaceholderPage title="Manutenções" />} />
             <Route path="/relatorios" element={<PlaceholderPage title="Relatórios" />} />
