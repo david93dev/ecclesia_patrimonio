@@ -10,6 +10,9 @@ import { PatrimonioListPage } from "../pages/patrimonios/PatrimonioListPage";
 import { DepartamentoCreatePage } from "../pages/departamentos/DepartamentoCreatePage";
 import { DepartamentoEditPage } from "../pages/departamentos/DepartamentoEditPage";
 import { DepartamentoListPage } from "../pages/departamentos/DepartamentoListPage";
+import { EmprestimoCreatePage } from "../pages/emprestimos/EmprestimoCreatePage";
+import { EmprestimoListPage } from "../pages/emprestimos/EmprestimoListPage";
+import { EmprestimoReturnPage } from "../pages/emprestimos/EmprestimoReturnPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
 
@@ -31,6 +34,9 @@ export const AppRoutes = () => (
             <Route path="/departamentos" element={<DepartamentoListPage />} />
             <Route path="/departamentos/novo" element={<DepartamentoCreatePage />} />
             <Route path="/departamentos/:id/editar" element={<DepartamentoEditPage />} />
+            <Route path="/emprestimos" element={<EmprestimoListPage />} />
+            <Route path="/emprestimos/novo" element={<EmprestimoCreatePage />} />
+            <Route path="/emprestimos/:id/devolver" element={<EmprestimoReturnPage />} />
             {/* <Route path="/inventario" element={<PlaceholderPage title="Inventário" />} />
             <Route path="/manutencoes" element={<PlaceholderPage title="Manutenções" />} />
             <Route path="/relatorios" element={<PlaceholderPage title="Relatórios" />} />

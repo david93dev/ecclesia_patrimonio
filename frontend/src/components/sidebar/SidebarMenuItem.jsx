@@ -8,6 +8,7 @@ import {
   FiSettings,
   FiTool,
   FiUsers,
+  FiRepeat,
 } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 
@@ -15,6 +16,7 @@ const icons = {
   inicio: FiHome,
   patrimonio: FiArchive,
   departamentos: FiLayers,
+  emprestimos: FiRepeat,
   inventario: FiClipboard,
   manutencao: FiTool,
   relatorios: FiBarChart2,

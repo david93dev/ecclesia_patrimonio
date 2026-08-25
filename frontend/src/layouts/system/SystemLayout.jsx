@@ -7,6 +7,7 @@ const routeTitles = {
   "/dashboard": "Visão geral",
   "/patrimonios": "Patrimônios",
   "/departamentos": "Departamentos",
+  "/emprestimos": "Empréstimos",
   "/inventario": "Inventário",
   "/manutencoes": "Manutenções",
   "/relatorios": "Relatórios",
@@ -21,6 +22,8 @@ export const SystemLayout = () => {
     ? "Gestão de Patrimônios"
     : pathname.startsWith("/departamentos")
       ? "Gestão de Departamentos"
+    : pathname.startsWith("/emprestimos")
+      ? "Gestão de Empréstimos"
     : routeTitles[pathname] ?? "Área administrativa";
   return (
     <div className="flex h-dvh min-h-0 overflow-hidden bg-app-background text-foreground">
