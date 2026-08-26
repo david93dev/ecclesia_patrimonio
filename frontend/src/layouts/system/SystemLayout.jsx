@@ -29,6 +29,8 @@ export const SystemLayout = () => {
       ? "Gestão de Empréstimos"
     : pathname.startsWith("/users")
       ? "Gestão de Usuários"
+    : pathname.startsWith("/settings")
+      ? "Configurações do Sistema"
     : routeTitles[pathname] ?? "Área administrativa";
   return (
     <div className="flex h-dvh min-h-0 overflow-hidden bg-app-background text-foreground">

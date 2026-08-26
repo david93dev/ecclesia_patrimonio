@@ -38,10 +38,17 @@ const menuItems = [
     to: "/users",
     adminOnly: true,
   },
+  {
+    id: "settings",
+    label: "Configurações",
+    icon: "settings",
+    to: "/settings",
+    permission: "settings.view",
+  },
 ];
 
 export const Sidebar = ({ activeItem, onSelect }) => {
-  const { user } = useAuth();
+  const { user, hasPermission } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -108,7 +115,7 @@ export const Sidebar = ({ activeItem, onSelect }) => {
           </button>
         </header>
         <SidebarMenu
-          items={menuItems.filter((item) => !item.adminOnly || user?.role === "Administrador")}
+          items={menuItems.filter((item) => (!item.adminOnly || user?.role === "Administrador") && (!item.permission || hasPermission(item.permission)))}
           collapsed={collapsed}
           activeItem={activeItem}
           onSelect={(id) => {

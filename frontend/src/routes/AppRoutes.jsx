@@ -21,6 +21,9 @@ import { UserEditPage } from "../pages/users/UserEditPage";
 import { UserListPage } from "../pages/users/UserListPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
+import { SettingsPage } from "../pages/settings/SettingsPage";
+import { InstitutionEditPage } from "../pages/settings/InstitutionEditPage";
+import { NotificationSettingsPage } from "../pages/settings/NotificationSettingsPage";
 
 export const AppRoutes = () => (
   <BrowserRouter>
@@ -49,6 +52,9 @@ export const AppRoutes = () => (
             <Route path="/users" element={<UserListPage />} />
             <Route path="/users/new" element={<UserCreatePage />} />
             <Route path="/users/:id/edit" element={<UserEditPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/settings/institution/edit" element={<InstitutionEditPage />} />
+            <Route path="/settings/notifications" element={<NotificationSettingsPage />} />
             {/* <Route path="/inventory" element={<PlaceholderPage title="Inventário" />} />
             <Route path="/maintenance" element={<PlaceholderPage title="Manutenções" />} />
             <Route path="/reports" element={<PlaceholderPage title="Relatórios" />} />
