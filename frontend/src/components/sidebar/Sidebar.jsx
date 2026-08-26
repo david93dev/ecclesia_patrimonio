@@ -1,49 +1,49 @@
 import { useEffect, useState } from "react";
 import { FiChevronLeft, FiMenu, FiX } from "react-icons/fi";
 import logo from "../../assets/ecclesia-logo-v3.png";
-import isotipo from "../../assets/ecclesia-isotipo-v3.png";
+import logoSymbol from "../../assets/ecclesia-symbol-v3.png";
 import { SidebarMenu } from "./SidebarMenu";
 import { SidebarUser } from "./SidebarUser";
 
 const menuItems = [
-  { id: "inicio", label: "Visão geral", icon: "inicio", to: "/dashboard" },
+  { id: "dashboard", label: "Visão geral", icon: "dashboard", to: "/dashboard" },
   {
-    id: "patrimonio",
+    id: "assets",
     label: "Patrimônios",
-    icon: "patrimonio",
-    to: "/patrimonios",
+    icon: "assets",
+    to: "/assets",
   },
   {
-    id: "departamentos",
+    id: "departments",
     label: "Departamentos",
-    icon: "departamentos",
-    to: "/departamentos",
+    icon: "departments",
+    to: "/departments",
   },
-  { id: "emprestimos", label: "Empréstimos", icon: "emprestimos", to: "/emprestimos" },
+  { id: "loans", label: "Empréstimos", icon: "loans", to: "/loans" },
   // {
-  //   id: "inventario",
+  //   id: "inventory",
   //   label: "Inventário",
-  //   icon: "inventario",
-  //   to: "/inventario",
+  //   icon: "inventory",
+  //   to: "/inventory",
   // },
   // {
-  //   id: "manutencao",
+  //   id: "maintenance",
   //   label: "Manutenções",
-  //   icon: "manutencao",
-  //   to: "/manutencoes",
+  //   icon: "maintenance",
+  //   to: "/maintenance",
   // },
   // {
-  //   id: "relatorios",
+  //   id: "reports",
   //   label: "Relatórios",
-  //   icon: "relatorios",
-  //   to: "/relatorios",
+  //   icon: "reports",
+  //   to: "/reports",
   // },
-  // { id: "usuarios", label: "Usuários", icon: "usuarios", to: "/usuarios" },
+  // { id: "users", label: "Usuários", icon: "users", to: "/users" },
   // {
-  //   id: "configuracoes",
+  //   id: "settings",
   //   label: "Configurações",
-  //   icon: "configuracoes",
-  //   to: "/configuracoes",
+  //   icon: "settings",
+  //   to: "/settings",
   // },
 ];
 
@@ -82,7 +82,7 @@ export const Sidebar = ({ activeItem, onSelect }) => {
           className={`relative flex h-20 shrink-0 items-center ${collapsed ? "justify-center px-3" : "justify-between px-4"}`}
         >
           <img
-            src={collapsed ? isotipo : logo}
+            src={collapsed ? logoSymbol : logo}
             alt="Ecclesia Patrimônio"
             className={`${collapsed ? "w-10" : "w-38"} h-auto object-contain`}
           />

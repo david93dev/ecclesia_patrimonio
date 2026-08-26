@@ -3,7 +3,7 @@ import { FiCheckCircle, FiImage, FiSave } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/Button";
 
-const emptyPatrimonio = {
+const emptyAsset = {
   nome: "", descricao: "", categoria: "", departamento: "", tipo: "",
   responsavel: "", valor: "", dataAquisicao: "", imagem: null,
 };
@@ -20,13 +20,13 @@ const Field = ({ name, label, optional, children, formState, ...props }) => {
   </label>;
 };
 
-export const PatrimonioForm = ({ initialValues = emptyPatrimonio, onSubmit, submitLabel, loadingLabel, requireChanges = false }) => {
-  const [values, setValues] = useState(() => ({ ...emptyPatrimonio, ...initialValues }));
+export const AssetForm = ({ initialValues = emptyAsset, onSubmit, submitLabel, loadingLabel, requireChanges = false }) => {
+  const [values, setValues] = useState(() => ({ ...emptyAsset, ...initialValues }));
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const update = ({ target }) => setValues((current) => ({ ...current, [target.name]: target.files?.[0] ?? target.value }));
-  const hasChanges = Object.keys(emptyPatrimonio).some((field) => {
+  const hasChanges = Object.keys(emptyAsset).some((field) => {
     if (values[field] instanceof File) return true;
     return String(values[field] ?? "") !== String(initialValues[field] ?? "");
   });
@@ -65,8 +65,9 @@ export const PatrimonioForm = ({ initialValues = emptyPatrimonio, onSubmit, subm
       <Field formState={formState} name="descricao" label="Descrição"><textarea name="descricao" value={values.descricao} onChange={update} rows="5" placeholder="Descreva características e estado do item" className={`${fieldClass(errors.descricao)} py-3 md:min-h-32`} /></Field>
     </div>
     <div className="mt-7 flex flex-col-reverse gap-3 border-t border-border pt-6 sm:flex-row sm:justify-end">
-      <Link to="/patrimonios" className="grid h-10 place-items-center rounded-xl border border-border px-4 text-xs font-semibold text-muted">Cancelar</Link>
+      <Link to="/assets" className="grid h-10 place-items-center rounded-xl border border-border px-4 text-xs font-semibold text-muted">Cancelar</Link>
       <Button type="submit" variant="primary" Icon={submitting ? FiCheckCircle : FiSave} iconAnimation="none" loading={submitting} loadingLabel={loadingLabel} disabled={requireChanges && !hasChanges} title={requireChanges && !hasChanges ? "Faça alguma alteração antes de salvar" : undefined}>{submitLabel}</Button>
     </div>
   </form>;
 };
+

@@ -9,7 +9,7 @@ const wait = (milliseconds, signal) => new Promise((resolve, reject) => {
   signal?.addEventListener("abort", () => { clearTimeout(timer); reject(new DOMException("Requisição cancelada", "AbortError")); }, { once: true });
 });
 
-// Substitua somente esta função pela chamada HTTP quando a API estiver disponível.
+// Replace only this function with the HTTP call when the API becomes available.
 export const getDashboardData = async ({ signal } = {}) => {
   await wait(700, signal);
   const simulatedState = new URLSearchParams(window.location.search).get("dashboardState");

@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { PageHeader } from "../../components/layout/PageHeader";
-import { PatrimonioForm } from "../../components/patrimonios/PatrimonioForm";
+import { AssetForm } from "../../components/assets/AssetForm";
 import { BackLink } from "../../components/ui/BackLink";
-import { createPatrimonio } from "../../services/patrimonioService";
+import { createAsset } from "../../services/assetService";
 
-export const PatrimonioCreatePage = () => {
+export const AssetCreatePage = () => {
   const navigate = useNavigate();
   const submit = async (values) => {
-    await createPatrimonio(values);
-    navigate("/patrimonios", {
+    await createAsset(values);
+    navigate("/assets", {
       replace: true,
       state: { success: "Patrimônio cadastrado com sucesso." },
     });
@@ -16,7 +16,7 @@ export const PatrimonioCreatePage = () => {
 
   return (
     <div className="mx-auto max-w-5xl p-5 sm:p-8 lg:p-10">
-      <BackLink to="/patrimonios" className="mb-5">
+      <BackLink to="/assets" className="mb-5">
         Voltar à listagem
       </BackLink>
       <PageHeader
@@ -24,7 +24,7 @@ export const PatrimonioCreatePage = () => {
         title="Cadastrar patrimônio"
         description="Preencha os dados para registrar um novo item."
       />
-      <PatrimonioForm
+      <AssetForm
         onSubmit={submit}
         submitLabel="Cadastrar patrimônio"
         loadingLabel="Cadastrando..."
@@ -32,3 +32,4 @@ export const PatrimonioCreatePage = () => {
     </div>
   );
 };
+

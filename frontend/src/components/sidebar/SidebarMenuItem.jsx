@@ -13,15 +13,15 @@ import {
 import { NavLink } from "react-router-dom";
 
 const icons = {
-  inicio: FiHome,
-  patrimonio: FiArchive,
-  departamentos: FiLayers,
-  emprestimos: FiRepeat,
-  inventario: FiClipboard,
-  manutencao: FiTool,
-  relatorios: FiBarChart2,
-  usuarios: FiUsers,
-  configuracoes: FiSettings,
+  dashboard: FiHome,
+  assets: FiArchive,
+  departments: FiLayers,
+  loans: FiRepeat,
+  inventory: FiClipboard,
+  maintenance: FiTool,
+  reports: FiBarChart2,
+  users: FiUsers,
+  settings: FiSettings,
 };
 
 const Icon = ({ name }) => {

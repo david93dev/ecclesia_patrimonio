@@ -94,7 +94,7 @@ export const DashboardPage = () => {
     }
   }, []);
 
-  // Consulta inicial sincronizada com a montagem; as atualizações de estado ocorrem após a resposta assíncrona.
+  // The initial request is synchronized with mounting; state updates happen after the asynchronous response.
    
   useEffect(() => {
     const controller = new AbortController();

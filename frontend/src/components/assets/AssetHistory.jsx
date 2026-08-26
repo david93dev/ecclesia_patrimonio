@@ -5,7 +5,7 @@ import { Pagination } from "../ui/Pagination";
 const PAGE_SIZE = 4;
 const formatDate = (value) => new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date(value));
 
-export const PatrimonioHistory = ({ entries = [] }) => {
+export const AssetHistory = ({ entries = [] }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const orderedEntries = useMemo(() => [...entries].sort((a, b) => new Date(b.data) - new Date(a.data)), [entries]);
   const totalPages = Math.max(1, Math.ceil(orderedEntries.length / PAGE_SIZE));
@@ -24,3 +24,4 @@ export const PatrimonioHistory = ({ entries = [] }) => {
     <Pagination currentPage={safePage} totalItems={orderedEntries.length} pageSize={PAGE_SIZE} onPageChange={setCurrentPage} itemLabel="alterações" className="mt-6" />
   </section>;
 };
+

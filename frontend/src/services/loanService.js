@@ -1,17 +1,17 @@
-import { listPatrimonios } from "./patrimonioService";
+import { listAssets } from "./assetService";
 
 const API_URL = import.meta.env.VITE_API_URL?.replace(/\/$/, "");
 const LOAN_KEY = "ecclesia:emprestimos";
 const ASSET_KEY = "ecclesia:patrimonios";
 const wait = (ms = 350) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const getEmprestimoStatus = (loan) => {
+export const getLoanStatus = (loan) => {
   if (loan.status === "Devolvido") return "Devolvido";
   const today = new Date().toLocaleDateString("en-CA");
   return loan.dataPrevistaDevolucao < today ? "Atrasado" : "Emprestado";
 };
 
-const MOCK_EMPRESTIMOS = [
+const MOCK_LOANS = [
   {
     id: "emp-001",
     patrimonioId: "pat-003",
@@ -71,12 +71,12 @@ const readLoans = () => {
   try {
     const stored = JSON.parse(localStorage.getItem(LOAN_KEY)) ?? [];
     const storedIds = new Set(stored.map((item) => String(item.id)));
-    return [...stored, ...MOCK_EMPRESTIMOS.filter((item) => !storedIds.has(item.id))];
-  } catch { return MOCK_EMPRESTIMOS; }
+    return [...stored, ...MOCK_LOANS.filter((item) => !storedIds.has(item.id))];
+  } catch { return MOCK_LOANS; }
 };
 
 const changeAssetStatus = async (assetId, status, historyAction, extra = {}) => {
-  const assets = await listPatrimonios();
+  const assets = await listAssets();
   const index = assets.findIndex((item) => String(item.id) === String(assetId));
   if (index < 0) throw new Error("Patrimônio não encontrado.");
   const current = assets[index];
@@ -92,22 +92,22 @@ const changeAssetStatus = async (assetId, status, historyAction, extra = {}) => 
   return updated;
 };
 
-export const listEmprestimos = async () => {
+export const listLoans = async () => {
   if (API_URL) return request("/emprestimos");
   await wait();
   return readLoans();
 };
 
-export const listPatrimoniosDisponiveis = async () => {
+export const listAvailableAssets = async () => {
   if (API_URL) return request("/patrimonios?status=Disponível");
-  const assets = await listPatrimonios();
+  const assets = await listAssets();
   return assets.filter((item) => String(item.status).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() === "disponivel");
 };
 
-export const createEmprestimo = async (data, user) => {
+export const createLoan = async (data, user) => {
   if (API_URL) return request("/emprestimos", { method: "POST", body: JSON.stringify(data) });
   await wait(600);
-  const available = await listPatrimoniosDisponiveis();
+  const available = await listAvailableAssets();
   const asset = available.find((item) => String(item.id) === String(data.patrimonioId));
   if (!asset) throw new Error("Este patrimônio não está mais disponível para empréstimo.");
   const now = new Date().toISOString();
@@ -122,7 +122,7 @@ export const createEmprestimo = async (data, user) => {
   return loan;
 };
 
-export const devolverEmprestimo = async (id, data, user) => {
+export const returnLoan = async (id, data, user) => {
   if (API_URL) return request(`/emprestimos/${id}/devolucao`, { method: "POST", body: JSON.stringify(data) });
   await wait(600);
   const loans = readLoans();
@@ -140,10 +140,11 @@ const fileToDataUrl = (file) => new Promise((resolve, reject) => {
   const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = () => reject(new Error("Não foi possível processar o documento.")); reader.readAsDataURL(file);
 });
 
-export const anexarTermoAssinado = async (id, file, user) => {
+export const attachSignedTerm = async (id, file, user) => {
   if (API_URL) { const body = new FormData(); body.append("termo", file); return request(`/emprestimos/${id}/termo-assinado`, { method: "POST", body, headers: {} }); }
   await wait(500); const loans = readLoans(); const index = loans.findIndex((item) => String(item.id) === String(id));
   if (index < 0) throw new Error("Empréstimo não encontrado.");
   loans[index] = { ...loans[index], termoAssinado: { nome: file.name, tipo: file.type, tamanho: file.size, dados: await fileToDataUrl(file), anexadoEm: new Date().toISOString(), anexadoPor: user?.name ?? user?.email ?? "Usuário do sistema" } };
   localStorage.setItem(LOAN_KEY, JSON.stringify(loans)); return loans[index];
 };
+

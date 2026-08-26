@@ -8,7 +8,7 @@ import { PageFeedback } from "../../components/ui/PageFeedback";
 import { TableButton } from "../../components/ui/TableButton";
 import { SearchField } from "../../components/ui/SearchField";
 import { FilterPanel } from "../../components/ui/FilterPanel";
-import { listPatrimonios } from "../../services/patrimonioService";
+import { listAssets } from "../../services/assetService";
 
 const columns = [
   {
@@ -44,13 +44,13 @@ const columns = [
     render: (item) => (
       <div className="flex gap-2">
         <TableButton
-          to={`/patrimonios/${item.id}`}
+          to={`/assets/${item.id}`}
           Icon={FiEye}
           label={`Visualizar ${item.nome}`}
           title="Visualizar"
         />
         <TableButton
-          to={`/patrimonios/${item.id}/editar`}
+          to={`/assets/${item.id}/edit`}
           Icon={FiEdit2}
           label={`Editar ${item.nome}`}
           title="Editar"
@@ -64,14 +64,14 @@ const emptyFilters = { categoria: "", departamento: "", status: "", tipo: "" };
 const normalize = (value) => String(value ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 const unique = (values) => [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b, "pt-BR"));
 
-export const PatrimonioListPage = () => {
+export const AssetListPage = () => {
   const location = useLocation();
   const [state, setState] = useState({ loading: true, items: [], error: "" });
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState(emptyFilters);
 
   useEffect(() => {
-    listPatrimonios()
+    listAssets()
       .then((items) => setState({ loading: false, items, error: "" }))
       .catch((error) =>
         setState({ loading: false, items: [], error: error.message }),
@@ -103,7 +103,7 @@ export const PatrimonioListPage = () => {
         title="Patrimônios"
         description="Consulte e cadastre os bens da instituição."
         actionLabel="Novo patrimônio"
-        actionTo="/patrimonios/novo"
+        actionTo="/assets/new"
         ActionIcon={FiPlus}
       />
 
@@ -137,3 +137,4 @@ export const PatrimonioListPage = () => {
     </div>
   );
 };
+

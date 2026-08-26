@@ -3,18 +3,18 @@ import { AuthProvider } from "../contexts/AuthContext";
 import { SystemLayout } from "../layouts/system/SystemLayout";
 import { DashboardPage } from "../pages/dashboard/DashboardPage";
 import { AuthLogin } from "../pages/login/AuthLogin";
-import { PatrimonioCreatePage } from "../pages/patrimonios/PatrimonioCreatePage";
-import { PatrimonioDetailPage } from "../pages/patrimonios/PatrimonioDetailPage";
-import { PatrimonioEditPage } from "../pages/patrimonios/PatrimonioEditPage";
-import { PatrimonioListPage } from "../pages/patrimonios/PatrimonioListPage";
-import { DepartamentoCreatePage } from "../pages/departamentos/DepartamentoCreatePage";
-import { DepartamentoEditPage } from "../pages/departamentos/DepartamentoEditPage";
-import { DepartamentoListPage } from "../pages/departamentos/DepartamentoListPage";
-import { EmprestimoCreatePage } from "../pages/emprestimos/EmprestimoCreatePage";
-import { EmprestimoDetailPage } from "../pages/emprestimos/EmprestimoDetailPage";
-import { EmprestimoListPage } from "../pages/emprestimos/EmprestimoListPage";
-import { EmprestimoReturnPage } from "../pages/emprestimos/EmprestimoReturnPage";
-import { EmprestimoTermPage } from "../pages/emprestimos/EmprestimoTermPage";
+import { AssetCreatePage } from "../pages/assets/AssetCreatePage";
+import { AssetDetailPage } from "../pages/assets/AssetDetailPage";
+import { AssetEditPage } from "../pages/assets/AssetEditPage";
+import { AssetListPage } from "../pages/assets/AssetListPage";
+import { DepartmentCreatePage } from "../pages/departments/DepartmentCreatePage";
+import { DepartmentEditPage } from "../pages/departments/DepartmentEditPage";
+import { DepartmentListPage } from "../pages/departments/DepartmentListPage";
+import { LoanCreatePage } from "../pages/loans/LoanCreatePage";
+import { LoanDetailPage } from "../pages/loans/LoanDetailPage";
+import { LoanListPage } from "../pages/loans/LoanListPage";
+import { LoanReturnPage } from "../pages/loans/LoanReturnPage";
+import { LoanTermPage } from "../pages/loans/LoanTermPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
 
@@ -29,23 +29,23 @@ export const AppRoutes = () => (
         <Route element={<ProtectedRoute />}>
           <Route element={<SystemLayout />}>
             <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/patrimonios" element={<PatrimonioListPage />} />
-            <Route path="/patrimonios/novo" element={<PatrimonioCreatePage />} />
-            <Route path="/patrimonios/:id/editar" element={<PatrimonioEditPage />} />
-            <Route path="/patrimonios/:id" element={<PatrimonioDetailPage />} />
-            <Route path="/departamentos" element={<DepartamentoListPage />} />
-            <Route path="/departamentos/novo" element={<DepartamentoCreatePage />} />
-            <Route path="/departamentos/:id/editar" element={<DepartamentoEditPage />} />
-            <Route path="/emprestimos" element={<EmprestimoListPage />} />
-            <Route path="/emprestimos/novo" element={<EmprestimoCreatePage />} />
-            <Route path="/emprestimos/:id/devolver" element={<EmprestimoReturnPage />} />
-            <Route path="/emprestimos/:id/termo" element={<EmprestimoTermPage />} />
-            <Route path="/emprestimos/:id" element={<EmprestimoDetailPage />} />
-            {/* <Route path="/inventario" element={<PlaceholderPage title="Inventário" />} />
-            <Route path="/manutencoes" element={<PlaceholderPage title="Manutenções" />} />
-            <Route path="/relatorios" element={<PlaceholderPage title="Relatórios" />} />
-            <Route path="/usuarios" element={<PlaceholderPage title="Usuários" />} />
-            <Route path="/configuracoes" element={<PlaceholderPage title="Configurações" />} /> */}
+            <Route path="/assets" element={<AssetListPage />} />
+            <Route path="/assets/new" element={<AssetCreatePage />} />
+            <Route path="/assets/:id/edit" element={<AssetEditPage />} />
+            <Route path="/assets/:id" element={<AssetDetailPage />} />
+            <Route path="/departments" element={<DepartmentListPage />} />
+            <Route path="/departments/new" element={<DepartmentCreatePage />} />
+            <Route path="/departments/:id/edit" element={<DepartmentEditPage />} />
+            <Route path="/loans" element={<LoanListPage />} />
+            <Route path="/loans/new" element={<LoanCreatePage />} />
+            <Route path="/loans/:id/return" element={<LoanReturnPage />} />
+            <Route path="/loans/:id/term" element={<LoanTermPage />} />
+            <Route path="/loans/:id" element={<LoanDetailPage />} />
+            {/* <Route path="/inventory" element={<PlaceholderPage title="Inventário" />} />
+            <Route path="/maintenance" element={<PlaceholderPage title="Manutenções" />} />
+            <Route path="/reports" element={<PlaceholderPage title="Relatórios" />} />
+            <Route path="/users" element={<PlaceholderPage title="Usuários" />} />
+            <Route path="/settings" element={<PlaceholderPage title="Configurações" />} /> */}
           </Route>
         </Route>
 
@@ -54,3 +54,4 @@ export const AppRoutes = () => (
     </AuthProvider>
   </BrowserRouter>
 );
+

@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-// O provider e o hook vivem juntos para manter a API de autenticação coesa.
+// The provider and hook live together to keep the authentication API cohesive.
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   const context = useContext(AuthContext);

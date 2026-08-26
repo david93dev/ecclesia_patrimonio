@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { InputField } from "./inputfield";
+import { InputField } from "./InputField";
 
 const EyeIcon = ({ hidden }) => hidden ? (
   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -19,7 +19,7 @@ const LockIcon = () => (
   </svg>
 );
 
-export const InputPasswordFiled = ({
+export const InputPasswordField = ({
   id = "password",
   label = "Senha",
   forgotPasswordHref = "#recuperar",

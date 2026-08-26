@@ -11,7 +11,7 @@ const Field = ({ name, label, optional, children, formState }) => {
   return <label className="block text-xs font-bold text-label">{label} {optional && <span className="font-normal text-muted">(opcional)</span>}{children ?? <input name={name} value={values[name]} onChange={update} className={inputClass(errors[name])} />}{errors[name] && <span className="mt-1 block text-[11px] text-danger">{errors[name]}</span>}</label>;
 };
 
-export const DepartamentoForm = ({ initialValues = emptyValues, onSubmit, editing = false }) => {
+export const DepartmentForm = ({ initialValues = emptyValues, onSubmit, editing = false }) => {
   const [values, setValues] = useState(() => ({ ...emptyValues, ...initialValues }));
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -37,6 +37,7 @@ export const DepartamentoForm = ({ initialValues = emptyValues, onSubmit, editin
       <Field formState={formState} name="descricao" label="Descrição" optional><textarea name="descricao" value={values.descricao} onChange={update} rows="5" className={`${inputClass(errors.descricao)} py-3 md:min-h-32`} /></Field>
       <label className="block text-xs font-bold text-label">Status<span className="mt-2 flex min-h-12 items-center rounded-xl border border-border bg-surface-subtle px-4 text-sm font-semibold text-success">Ativo</span></label>
     </div>
-    <div className="mt-7 flex flex-col-reverse gap-3 border-t border-border pt-6 sm:flex-row sm:justify-end"><Link to="/departamentos" className="grid h-10 place-items-center rounded-xl border border-border px-4 text-xs font-semibold text-muted">Cancelar</Link><Button type="submit" variant="primary" Icon={submitting ? FiCheckCircle : FiSave} loading={submitting} loadingLabel={editing ? "Salvando..." : "Cadastrando..."} disabled={editing && !hasChanges}>{editing ? "Salvar alterações" : "Cadastrar departamento"}</Button></div>
+    <div className="mt-7 flex flex-col-reverse gap-3 border-t border-border pt-6 sm:flex-row sm:justify-end"><Link to="/departments" className="grid h-10 place-items-center rounded-xl border border-border px-4 text-xs font-semibold text-muted">Cancelar</Link><Button type="submit" variant="primary" Icon={submitting ? FiCheckCircle : FiSave} loading={submitting} loadingLabel={editing ? "Salvando..." : "Cadastrando..."} disabled={editing && !hasChanges}>{editing ? "Salvar alterações" : "Cadastrar departamento"}</Button></div>
   </form>;
 };
+

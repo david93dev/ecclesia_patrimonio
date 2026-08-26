@@ -1,6 +1,6 @@
 const formatDate = (value) => value ? new Intl.DateTimeFormat("pt-BR", { timeZone: "UTC" }).format(new Date(`${value.slice(0, 10)}T12:00:00Z`)) : "—";
 
-export const createEmprestimoPdf = async (loan) => {
+export const createLoanPdf = async (loan) => {
   const { jsPDF } = await import("jspdf");
   const doc = new jsPDF({ unit: "mm", format: "a4" });
   const left = 20; const width = 170;
@@ -34,5 +34,6 @@ export const createEmprestimoPdf = async (loan) => {
   return doc;
 };
 
-export const downloadEmprestimoPdf = async (loan) => { const doc = await createEmprestimoPdf(loan); doc.save(`termo-emprestimo-${loan.patrimonio?.codigoPatrimonial ?? loan.id}.pdf`); };
-export const printEmprestimoPdf = async (loan) => { const doc = await createEmprestimoPdf(loan); doc.autoPrint(); window.open(doc.output("bloburl"), "_blank", "noopener,noreferrer"); };
+export const downloadLoanPdf = async (loan) => { const doc = await createLoanPdf(loan); doc.save(`termo-emprestimo-${loan.patrimonio?.codigoPatrimonial ?? loan.id}.pdf`); };
+export const printLoanPdf = async (loan) => { const doc = await createLoanPdf(loan); doc.autoPrint(); window.open(doc.output("bloburl"), "_blank", "noopener,noreferrer"); };
+

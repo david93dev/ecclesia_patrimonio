@@ -5,24 +5,24 @@ import { Sidebar } from "../../components/sidebar/Sidebar";
 
 const routeTitles = {
   "/dashboard": "Visão geral",
-  "/patrimonios": "Patrimônios",
-  "/departamentos": "Departamentos",
-  "/emprestimos": "Empréstimos",
-  "/inventario": "Inventário",
-  "/manutencoes": "Manutenções",
-  "/relatorios": "Relatórios",
-  "/usuarios": "Usuários",
-  "/configuracoes": "Configurações",
+  "/assets": "Patrimônios",
+  "/departments": "Departamentos",
+  "/loans": "Empréstimos",
+  "/inventory": "Inventário",
+  "/maintenance": "Manutenções",
+  "/reports": "Relatórios",
+  "/users": "Usuários",
+  "/settings": "Configurações",
 };
 
 export const SystemLayout = () => {
-  const [activeItem, setActiveItem] = useState("inicio");
+  const [activeItem, setActiveItem] = useState("dashboard");
   const { pathname } = useLocation();
-  const title = pathname.startsWith("/patrimonios")
+  const title = pathname.startsWith("/assets")
     ? "Gestão de Patrimônios"
-    : pathname.startsWith("/departamentos")
+    : pathname.startsWith("/departments")
       ? "Gestão de Departamentos"
-    : pathname.startsWith("/emprestimos")
+    : pathname.startsWith("/loans")
       ? "Gestão de Empréstimos"
     : routeTitles[pathname] ?? "Área administrativa";
   return (

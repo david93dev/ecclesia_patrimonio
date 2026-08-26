@@ -1,7 +1,7 @@
 const API_URL = import.meta.env.VITE_API_URL?.replace(/\/$/, "");
 const STORAGE_KEY = "ecclesia:patrimonios";
 
-const MOCK_PATRIMONIOS = [
+const MOCK_ASSETS = [
   {
     id: "pat-001",
     nome: "Projetor Epson PowerLite",
@@ -101,9 +101,9 @@ const readLocal = () => {
     const storedItems = localStorage.getItem(STORAGE_KEY);
     const customItems = storedItems ? JSON.parse(storedItems) : [];
     const customIds = new Set(customItems.map((item) => String(item.id)));
-    return [...customItems, ...MOCK_PATRIMONIOS.filter((item) => !customIds.has(item.id))];
+    return [...customItems, ...MOCK_ASSETS.filter((item) => !customIds.has(item.id))];
   } catch {
-    return MOCK_PATRIMONIOS;
+    return MOCK_ASSETS;
   }
 };
 
@@ -116,13 +116,13 @@ const request = async (path, options = {}) => {
   return response.status === 204 ? null : response.json();
 };
 
-export const listPatrimonios = async () => {
+export const listAssets = async () => {
   if (API_URL) return request("/patrimonios");
   await wait();
   return readLocal();
 };
 
-export const getPatrimonio = async (id) => {
+export const getAsset = async (id) => {
   if (API_URL) return request(`/patrimonios/${id}`);
   await wait();
   return readLocal().find((item) => String(item.id) === String(id)) ?? null;
@@ -136,7 +136,7 @@ const fileToDataUrl = (file) => new Promise((resolve, reject) => {
   reader.readAsDataURL(file);
 });
 
-export const createPatrimonio = async (data) => {
+export const createAsset = async (data) => {
   const formData = new FormData();
   Object.entries(data).forEach(([key, value]) => {
     if (value !== "" && value != null) formData.append(key, value);
@@ -158,7 +158,7 @@ export const createPatrimonio = async (data) => {
   return item;
 };
 
-export const updatePatrimonio = async (id, data) => {
+export const updateAsset = async (id, data) => {
   const formData = new FormData();
   Object.entries(data).forEach(([key, value]) => {
     if (key === "imagem" && !(value instanceof File)) return;
@@ -176,24 +176,24 @@ export const updatePatrimonio = async (id, data) => {
 
   const current = items[index];
   const editableFields = ["nome", "descricao", "categoria", "departamento", "tipo", "responsavel", "valor", "dataAquisicao"];
-  const alteracoes = editableFields
+  const changes = editableFields
     .filter((field) => String(current[field] ?? "") !== String(data[field] ?? ""))
     .map((field) => ({ campo: field, anterior: current[field] ?? "", atual: data[field] ?? "" }));
-  if (data.imagem instanceof File) alteracoes.push({ campo: "imagem", anterior: current.imagem ? "Imagem anterior" : "Sem imagem", atual: data.imagem.name });
+  if (data.imagem instanceof File) changes.push({ campo: "imagem", anterior: current.imagem ? "Imagem anterior" : "Sem imagem", atual: data.imagem.name });
 
   const updated = {
     ...current,
     ...data,
     imagem: data.imagem instanceof File ? await fileToDataUrl(data.imagem) : current.imagem,
     atualizadoEm: new Date().toISOString(),
-    historico: [...(current.historico ?? []), { data: new Date().toISOString(), acao: "Patrimônio atualizado", alteracoes }],
+    historico: [...(current.historico ?? []), { data: new Date().toISOString(), acao: "Patrimônio atualizado", alteracoes: changes }],
   };
   items[index] = updated;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   return updated;
 };
 
-export const inactivatePatrimonio = async (id) => {
+export const inactivateAsset = async (id) => {
   if (API_URL) return request(`/patrimonios/${id}/inativar`, { method: "PATCH" });
   await wait(500);
   const items = readLocal();
@@ -215,3 +215,4 @@ export const inactivatePatrimonio = async (id) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   return updated;
 };
+
