@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { FiArchive, FiCornerDownLeft, FiEye, FiPlus } from "react-icons/fi";
+import { FiArchive, FiClock, FiCornerDownLeft, FiEye, FiPlus } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
 import { PageHeader } from "../../components/layout/PageHeader";
 import { Badge } from "../../components/ui/Badge";
@@ -200,9 +200,18 @@ export const LoanListPage = () => {
         eyebrow="GESTÃO PATRIMONIAL"
         title="Empréstimos"
         description="Acompanhe retiradas, devoluções e responsáveis pelos patrimônios."
-        actionLabel="Novo empréstimo"
-        actionTo="/loans/new"
-        ActionIcon={FiPlus}
+        actions={
+          <>
+            <Link to="/loans/history" className="flex h-10 items-center gap-2 rounded-xl border border-border bg-surface px-4 text-xs font-semibold text-brand-700 transition hover:bg-brand-100/40">
+              <FiClock />
+              Histórico
+            </Link>
+            <Link to="/loans/new" className="flex h-10 items-center gap-2 rounded-xl bg-brand-700 px-4 text-xs font-semibold text-white transition hover:bg-brand-900">
+              <FiPlus />
+              Novo empréstimo
+            </Link>
+          </>
+        }
       />
       <FilterPanel
         fields={filterFields}

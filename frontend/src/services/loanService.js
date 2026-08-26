@@ -53,6 +53,23 @@ const MOCK_LOANS = [
     devolvidoEm: "2026-08-15T16:25:00.000Z",
     devolvidoPor: "David Silva",
   },
+  {
+    id: "emp-004",
+    patrimonioId: "pat-006",
+    patrimonio: { id: "pat-006", nome: "Ar-condicionado 18.000 BTUs", codigoPatrimonial: "PAT-00006", categoria: "Eletrodomésticos", departamento: "Secretaria" },
+    responsavel: "Beatriz Sousa",
+    finalidade: "Climatização do salão durante encontro comunitário",
+    dataRetirada: "2026-07-20",
+    dataPrevistaDevolucao: "2026-07-22",
+    dataDevolucao: "2026-07-22",
+    condicao: "Com avarias",
+    observacoes: "A grade frontal retornou trincada e foi encaminhada para avaliação.",
+    status: "Devolvido",
+    cadastradoEm: "2026-07-20T10:30:00.000Z",
+    cadastradoPor: "David Silva",
+    devolvidoEm: "2026-07-22T17:10:00.000Z",
+    devolvidoPor: "David Silva",
+  },
 ];
 
 const request = async (path, options = {}) => {

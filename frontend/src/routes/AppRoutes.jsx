@@ -12,6 +12,7 @@ import { DepartmentEditPage } from "../pages/departments/DepartmentEditPage";
 import { DepartmentListPage } from "../pages/departments/DepartmentListPage";
 import { LoanCreatePage } from "../pages/loans/LoanCreatePage";
 import { LoanDetailPage } from "../pages/loans/LoanDetailPage";
+import { LoanHistoryPage } from "../pages/loans/LoanHistoryPage";
 import { LoanListPage } from "../pages/loans/LoanListPage";
 import { LoanReturnPage } from "../pages/loans/LoanReturnPage";
 import { LoanTermPage } from "../pages/loans/LoanTermPage";
@@ -37,6 +38,7 @@ export const AppRoutes = () => (
             <Route path="/departments/new" element={<DepartmentCreatePage />} />
             <Route path="/departments/:id/edit" element={<DepartmentEditPage />} />
             <Route path="/loans" element={<LoanListPage />} />
+            <Route path="/loans/history" element={<LoanHistoryPage />} />
             <Route path="/loans/new" element={<LoanCreatePage />} />
             <Route path="/loans/:id/return" element={<LoanReturnPage />} />
             <Route path="/loans/:id/term" element={<LoanTermPage />} />

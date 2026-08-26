@@ -8,6 +8,7 @@ const routeTitles = {
   "/assets": "Patrimônios",
   "/departments": "Departamentos",
   "/loans": "Empréstimos",
+  "/loans/history": "Histórico de empréstimos",
   "/inventory": "Inventário",
   "/maintenance": "Manutenções",
   "/reports": "Relatórios",
@@ -18,7 +19,9 @@ const routeTitles = {
 export const SystemLayout = () => {
   const [activeItem, setActiveItem] = useState("dashboard");
   const { pathname } = useLocation();
-  const title = pathname.startsWith("/assets")
+  const title = pathname === "/loans/history"
+    ? routeTitles[pathname]
+    : pathname.startsWith("/assets")
     ? "Gestão de Patrimônios"
     : pathname.startsWith("/departments")
       ? "Gestão de Departamentos"

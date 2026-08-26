@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   FiCalendar,
+  FiAlertTriangle,
   FiCornerDownLeft,
   FiDownload,
   FiFileText,
@@ -37,6 +38,11 @@ const variants = {
   Devolvido: "success",
   Atrasado: "danger",
 };
+const normalizeCondition = (value) => String(value ?? "")
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .toLowerCase()
+  .trim();
 const Detail = ({ label, value, Icon }) => (
   <div className="min-w-0">
     <span className="flex items-center gap-2 text-[10px] font-bold tracking-wide text-muted uppercase">
@@ -74,6 +80,7 @@ export const LoanDetailPage = () => {
   }, [id]);
   const loan = state.loan;
   const status = loan ? getLoanStatus(loan) : "";
+  const hasDamage = Boolean(loan?.condicao && normalizeCondition(loan.condicao) !== "bom estado");
   const attachTerm = async ({ target }) => {
     const file = target.files?.[0];
     target.value = "";
@@ -207,6 +214,13 @@ export const LoanDetailPage = () => {
               />
             </div>
           </section>
+          {hasDamage && (
+            <section className="rounded-2xl border border-danger/25 bg-danger-soft p-5 shadow-card sm:p-7">
+              <h3 className="flex items-center gap-2 font-[Manrope] font-bold text-danger"><FiAlertTriangle />Avarias registradas</h3>
+              <p className="mt-3 text-sm font-semibold text-label">{loan.condicao}</p>
+              <p className="mt-2 text-sm leading-6 text-muted">{loan.observacoes || "Nenhuma descrição adicional foi informada."}</p>
+            </section>
+          )}
           <section className="rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-7">
             <h3 className="font-[Manrope] font-bold">Registro e devolução</h3>
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
