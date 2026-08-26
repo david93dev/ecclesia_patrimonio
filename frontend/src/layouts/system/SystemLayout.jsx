@@ -27,6 +27,8 @@ export const SystemLayout = () => {
       ? "Gestão de Departamentos"
     : pathname.startsWith("/loans")
       ? "Gestão de Empréstimos"
+    : pathname.startsWith("/users")
+      ? "Gestão de Usuários"
     : routeTitles[pathname] ?? "Área administrativa";
   return (
     <div className="flex h-dvh min-h-0 overflow-hidden bg-app-background text-foreground">

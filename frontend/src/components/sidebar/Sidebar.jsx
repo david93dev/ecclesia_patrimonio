@@ -4,6 +4,7 @@ import logo from "../../assets/ecclesia-logo-v3.png";
 import logoSymbol from "../../assets/ecclesia-symbol-v3.png";
 import { SidebarMenu } from "./SidebarMenu";
 import { SidebarUser } from "./SidebarUser";
+import { useAuth } from "../../contexts/AuthContext";
 
 const menuItems = [
   {
@@ -30,9 +31,17 @@ const menuItems = [
     icon: "departments",
     to: "/departments",
   },
+  {
+    id: "users",
+    label: "Usuários",
+    icon: "users",
+    to: "/users",
+    adminOnly: true,
+  },
 ];
 
 export const Sidebar = ({ activeItem, onSelect }) => {
+  const { user } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -99,7 +108,7 @@ export const Sidebar = ({ activeItem, onSelect }) => {
           </button>
         </header>
         <SidebarMenu
-          items={menuItems}
+          items={menuItems.filter((item) => !item.adminOnly || user?.role === "Administrador")}
           collapsed={collapsed}
           activeItem={activeItem}
           onSelect={(id) => {

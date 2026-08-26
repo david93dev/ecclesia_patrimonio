@@ -3,6 +3,7 @@ import ecclesiaLogo from "../../assets/ecclesia-logo-v3.png";
 import { InputField } from "../../components/ui/InputField";
 import { InputPasswordField } from "../../components/ui/InputPasswordField";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 
 const Brand = ({ mobile = false }) => (
@@ -23,12 +24,21 @@ export const AuthLogin = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    login({ email: data.get("email") });
-    navigate(location.state?.from?.pathname || "/dashboard", { replace: true });
+    setSubmitting(true);
+    setError("");
+    try {
+      await login({ email: data.get("email"), password: data.get("password") });
+      navigate(location.state?.from?.pathname || "/dashboard", { replace: true });
+    } catch (loginError) {
+      setError(loginError.message);
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -90,6 +100,7 @@ export const AuthLogin = () => {
           </div>
 
           <form onSubmit={handleSubmit}>
+            {error && <p role="alert" className="mb-4 rounded-xl bg-danger-soft p-3 text-xs font-medium text-danger">{error}</p>}
             <InputField
               id="email"
               label="E-mail"
@@ -115,9 +126,10 @@ export const AuthLogin = () => {
 
             <button
               type="submit"
-              className="group mt-2 flex h-13.75 w-full cursor-pointer items-center justify-center gap-2.75 rounded-[11px] border-0 bg-linear-[105deg,var(--color-brand-900),var(--color-brand-600)] text-sm font-bold text-white transition hover:-translate-y-0.5 active:translate-y-0"
+              disabled={submitting}
+              className="group mt-2 flex h-13.75 w-full cursor-pointer items-center justify-center gap-2.75 rounded-[11px] border-0 bg-linear-[105deg,var(--color-brand-900),var(--color-brand-600)] text-sm font-bold text-white transition hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-wait disabled:opacity-60"
             >
-              Entrar na plataforma
+              {submitting ? "Entrando..." : "Entrar na plataforma"}
               <svg
                 className="w-4.5 fill-none stroke-current stroke-2 transition [stroke-linecap:round] [stroke-linejoin:round] group-hover:translate-x-0.75"
                 viewBox="0 0 24 24"

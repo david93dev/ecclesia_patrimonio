@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useState } from "react";
+import { authenticateUser } from "../services/userService";
 
 const SESSION_KEY = "ecclesia:session";
 const AuthContext = createContext(null);
@@ -11,8 +12,9 @@ export const AuthProvider = ({ children }) => {
   const value = useMemo(() => ({
     user,
     isAuthenticated: Boolean(user),
-    login: ({ email }) => {
-      const session = { name: "David Silva", email, role: "Administrador", permissions: ["dashboard.view"] };
+    login: async ({ email, password }) => {
+      const registeredUser = await authenticateUser(email, password);
+      const session = registeredUser ?? { name: "David Silva", email, role: "Administrador", permissions: ["dashboard.view"] };
       localStorage.setItem(SESSION_KEY, JSON.stringify(session));
       setUser(session);
     },

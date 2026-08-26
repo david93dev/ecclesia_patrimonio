@@ -16,6 +16,9 @@ import { LoanHistoryPage } from "../pages/loans/LoanHistoryPage";
 import { LoanListPage } from "../pages/loans/LoanListPage";
 import { LoanReturnPage } from "../pages/loans/LoanReturnPage";
 import { LoanTermPage } from "../pages/loans/LoanTermPage";
+import { UserCreatePage } from "../pages/users/UserCreatePage";
+import { UserEditPage } from "../pages/users/UserEditPage";
+import { UserListPage } from "../pages/users/UserListPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
 
@@ -43,6 +46,9 @@ export const AppRoutes = () => (
             <Route path="/loans/:id/return" element={<LoanReturnPage />} />
             <Route path="/loans/:id/term" element={<LoanTermPage />} />
             <Route path="/loans/:id" element={<LoanDetailPage />} />
+            <Route path="/users" element={<UserListPage />} />
+            <Route path="/users/new" element={<UserCreatePage />} />
+            <Route path="/users/:id/edit" element={<UserEditPage />} />
             {/* <Route path="/inventory" element={<PlaceholderPage title="Inventário" />} />
             <Route path="/maintenance" element={<PlaceholderPage title="Manutenções" />} />
             <Route path="/reports" element={<PlaceholderPage title="Relatórios" />} />
