@@ -1,6 +1,6 @@
 import heroImage from "../../assets/hero.png";
 import ecclesiaLogo from "../../assets/ecclesia-logo-v3.png";
-import { InputField } from "../../components/ui/InputField";
+import { InputField } from "../../components/ui/inputfield";
 import { InputPasswordField } from "../../components/ui/InputPasswordField";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
