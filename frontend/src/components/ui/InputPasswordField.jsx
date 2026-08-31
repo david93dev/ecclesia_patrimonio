@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { InputField } from "./InputField";
+import { InputField } from "./inputfield";
 
 const EyeIcon = ({ hidden }) => hidden ? (
   <svg viewBox="0 0 24 24" aria-hidden="true">
